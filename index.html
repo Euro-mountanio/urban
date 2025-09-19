@@ -4,20 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Urban - Future Real Estate</title>
-    
-    <!-- PWA Meta Tags -->
-    <meta name="description" content="Next-generation property platform with AI-powered search and interactive maps">
-    <meta name="theme-color" content="#0f172a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Urban">
-    
-    <!-- Icons -->
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='bg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%230f172a'/><stop offset='100%' stop-color='%231e293b'/></linearGradient></defs><rect width='100' height='100' fill='url(%23bg)'/><path d='M20 75V35l30-20 30 20v40z' fill='%2306b6d4' stroke='%2300d4ff' stroke-width='2'/><circle cx='25' cy='25' r='3' fill='%2300d4ff'/><circle cx='75' cy='25' r='3' fill='%2300d4ff'/></svg>">
-    
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
-    
     <style>
         :root {
             --primary: #00d4ff;
@@ -185,306 +172,46 @@
             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
         
-        /* Futuristic Hero */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            animation: scanLine 3s linear infinite;
-        }
-        
-        @keyframes scanLine {
-            0% { width: 0; }
-            50% { width: 300px; }
-            100% { width: 0; }
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
-            animation: textGlow 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes textGlow {
-            from { filter: brightness(1); }
-            to { filter: brightness(1.2); }
-        }
-        
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-        }
-        
-        /* AI Search Bar */
-        .ai-search {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(20px);
-            padding: 2rem;
-            border-radius: 24px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .ai-search::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 24px;
-            z-index: -1;
-            opacity: 0.5;
-        }
-        
-        .search-row {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .search-input {
-            flex: 1;
-            min-width: 250px;
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 12px;
-            padding: 1rem;
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.3s;
-            outline: none;
-        }
-        
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-            transform: translateY(-2px);
-        }
-        
-        .ai-search-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--bg-dark);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* User menu */
+        .user-menu {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .ai-search-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
-        }
-        
-        /* Map Container */
-        .map-section {
-            margin: 3rem 0;
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(20px);
-            borderRadius: 24px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        .map-header {
-            padding: 2rem;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-        }
-        
-        .map-header h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-        
-        .map-controls {
-            display: flex;
             gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
         }
         
-        .map-filter {
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .map-filter.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--bg-dark);
-        }
-        
-        #map {
-            height: 500px;
-            width: 100%;
-            background: var(--surface);
-        }
-        
-        /* Property Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .stat-card {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transition: left 0.5s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
-        }
-        
-        .stat-card:hover::before {
-            left: 0;
-        }
-        
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 900;
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* Tabs */
-        .tabs-container {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            overflow: hidden;
-            margin: 3rem 0;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        .tabs {
             display: flex;
-            background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
-        }
-        
-        .tab {
-            flex: 1;
-            padding: 1.5rem;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 1rem;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
-        .tab::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            transition: all 0.3s;
-            transform: translateX(-50%);
+        /* Main content */
+        .main-content {
+            padding: 2rem 0;
         }
         
-        .tab.active {
-            color: var(--primary);
-            background: rgba(0, 212, 255, 0.1);
-        }
-        
-        .tab.active::after {
-            width: 80%;
-        }
-        
-        .tab-content {
-            padding: 2rem;
+        /* Page sections */
+        .page-section {
             display: none;
         }
         
-        .tab-content.active {
+        .page-section.active {
             display: block;
-            animation: slideUp 0.5s ease-out;
+            animation: fadeIn 0.5s ease;
         }
         
-        /* Property Cards */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Property cards */
         .properties-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -502,27 +229,10 @@
             position: relative;
         }
         
-        .property-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 1;
-        }
-        
         .property-card:hover {
             transform: translateY(-10px) scale(1.02);
             border-color: var(--primary);
             box-shadow: 0 25px 50px rgba(0, 212, 255, 0.3);
-        }
-        
-        .property-card:hover::before {
-            opacity: 1;
         }
         
         .property-image {
@@ -536,26 +246,8 @@
             overflow: hidden;
         }
         
-        .property-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            animation: shimmer 3s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
         .property-info {
             padding: 2rem;
-            position: relative;
-            z-index: 2;
         }
         
         .property-price {
@@ -572,7 +264,6 @@
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            color: var(--text-primary);
         }
         
         .property-location {
@@ -588,7 +279,6 @@
             gap: 1.5rem;
             color: var(--text-secondary);
             font-size: 0.9rem;
-            flex-wrap: wrap;
         }
         
         .property-tag {
@@ -603,7 +293,6 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            z-index: 2;
         }
         
         .property-tag.rent {
@@ -617,6 +306,8 @@
             border-radius: 16px;
             margin-bottom: 2rem;
             border: 1px solid rgba(0, 212, 255, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .form-section h3 {
@@ -642,7 +333,6 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--text-primary);
         }
         
         .form-group input,
@@ -663,7 +353,6 @@
         .form-group textarea:focus {
             border-color: var(--primary);
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-            transform: translateY(-2px);
         }
         
         .submit-btn {
@@ -675,7 +364,7 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -709,12 +398,6 @@
             border: 1px solid rgba(0, 212, 255, 0.3);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
             position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-        
-        @keyframes modalSlideIn {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         .close-modal {
@@ -758,57 +441,130 @@
             display: block;
         }
         
-        /* Install Banner */
-        .install-banner {
-            background: linear-gradient(135deg, var(--success), #059669);
-            color: white;
-            padding: 1rem;
+        /* Property Detail Page */
+        .property-detail {
+            padding: 2rem 0;
+        }
+        
+        .property-gallery {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .main-image {
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+        
+        .thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .thumbnail {
+            height: 125px;
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .property-detail-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .property-info-detail {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .property-sidebar {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            height: fit-content;
+        }
+        
+        .agent-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .agent-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        /* 3D Render Section */
+        .render-container {
+            height: 400px;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .render-placeholder {
+            font-size: 3rem;
             text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
+            color: var(--text-secondary);
         }
         
-        .install-banner.show {
-            transform: translateY(0);
+        .render-controls {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
         }
         
-        .install-btn {
-            background: white;
-            color: var(--success);
-            border: none;
+        .render-btn {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
             padding: 0.5rem 1rem;
             border-radius: 8px;
-            margin-left: 1rem;
             cursor: pointer;
-            font-weight: 700;
+            backdrop-filter: blur(10px);
         }
         
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero h1 { font-size: 2.5rem; }
-            .search-row { flex-direction: column; }
-            .ai-search { padding: 1.5rem; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .tabs { flex-direction: column; }
             .properties-grid { grid-template-columns: 1fr; }
-            #map { height: 350px; }
-        }
-        
-        /* Animations */
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-slide-up {
-            animation: slideUp 0.6s ease-out;
+            .property-gallery { grid-template-columns: 1fr; }
+            .property-detail-content { grid-template-columns: 1fr; }
         }
         
         /* Loading Animation */
@@ -825,39 +581,9 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        
-        /* Custom Map Styles */
-        .leaflet-popup-content-wrapper {
-            background: rgba(30, 41, 59, 0.95);
-            color: var(--text-primary);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .leaflet-popup-tip {
-            background: rgba(30, 41, 59, 0.95);
-        }
-        
-        .property-popup h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .property-popup .price {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: var(--accent);
-        }
     </style>
 </head>
 <body>
-    <!-- Install Banner -->
-    <div id="installBanner" class="install-banner">
-        <button class="close-banner" onclick="hideInstallBanner()" style="position: absolute; top: 0.5rem; right: 1rem; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">×</button>
-        🚀 Install Urban for the ultimate real estate experience!
-        <button class="install-btn" onclick="installPWA()">Install App</button>
-    </div>
-
     <!-- Auth Modal -->
     <div id="authModal" class="modal">
         <div class="modal-content">
@@ -924,11 +650,10 @@
         <nav class="container">
             <div class="logo">Urban</div>
             <ul class="nav-links">
-                <li><a href="#" onclick="showTab('explore')">🔍 Explore</a></li>
-                <li><a href="#" onclick="showTab('buy')">🏠 Buy</a></li>
-                <li><a href="#" onclick="showTab('rent')">🏢 Rent</a></li>
-                <li><a href="#" onclick="showTab('sell')">📝 List</a></li>
-                <li><a href="#" onclick="showTab('contact')">💬 Contact</a></li>
+                <li><a href="#" onclick="showPage('home')">🏠 Home</a></li>
+                <li><a href="#" onclick="showPage('properties')">🔍 Properties</a></li>
+                <li><a href="#" onclick="showPage('agents')">👨‍💼 Agents</a></li>
+                <li><a href="#" onclick="showPage('about')">ℹ️ About</a></li>
             </ul>
             
             <div class="auth-buttons" id="authButtons">
@@ -936,158 +661,319 @@
                 <button class="auth-btn register-btn" onclick="openAuthModal()">Register</button>
             </div>
             
-            <div id="userMenu" style="display: none;">
+            <div class="user-menu" id="userMenu" style="display: none;">
+                <div class="user-avatar" id="userAvatar">U</div>
                 <button class="auth-btn login-btn" onclick="logout()">Logout</button>
             </div>
-            
-            <button class="mobile-menu" style="display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer;">☰</button>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Future of Real Estate</h1>
-            <p class="hero-subtitle">AI-powered property discovery with immersive visualization</p>
+    <main class="container main-content">
+        <!-- Home Page -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <h1>Future of Real Estate</h1>
+                <p class="hero-subtitle">AI-powered property discovery with immersive visualization</p>
+                
+                <div class="ai-search">
+                    <div class="search-row">
+                        <input type="text" class="search-input" placeholder="🌍 Enter location or landmark...">
+                        <select class="search-input">
+                            <option value="">🏠 All Property Types</option>
+                            <option value="house">🏡 Houses</option>
+                            <option value="apartment">🏢 Apartments</option>
+                            <option value="condo">🏬 Condos</option>
+                            <option value="commercial">🏪 Commercial</option>
+                            <option value="luxury">💎 Luxury</option>
+                        </select>
+                    </div>
+                    <div class="search-row">
+                        <select class="search-input">
+                            <option value="">💰 Any Price</option>
+                            <option value="0-200000">$0 - $200k</option>
+                            <option value="200000-500000">$200k - $500k</option>
+                            <option value="500000-1000000">$500k - $1M</option>
+                            <option value="1000000+">$1M+</option>
+                        </select>
+                        <select class="search-input">
+                            <option value="">📋 Buy or Rent</option>
+                            <option value="sale">🏠 For Sale</option>
+                            <option value="rent">🏢 For Rent</option>
+                        </select>
+                        <button class="ai-search-btn">
+                            <span>🤖 AI Search</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">2.5K+</div>
+                    <div class="stat-label">Properties Listed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1.8K+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Cities Covered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+
+            <h2 style="margin: 3rem 0 1.5rem 0;">Featured Properties</h2>
+            <div class="properties-grid">
+                <div class="property-card" onclick="viewProperty(1)">
+                    <div class="property-image">🏙️</div>
+                    <div class="property-tag">sale</div>
+                    <div class="property-info">
+                        <div class="property-price">$1,250,000</div>
+                        <div class="property-title">Modern Penthouse</div>
+                        <div class="property-location">📍 Manhattan, NYC</div>
+                        <div class="property-features">
+                            <span>🛏️ 3 Beds</span>
+                            <span>🛁 2 Baths</span>
+                            <span>📐 2,500 sq ft</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card" onclick="viewProperty(2)">
+                    <div class="property-image">🏢</div>
+                    <div class="property-tag rent">rent</div>
+                    <div class="property-info">
+                        <div class="property-price">$4,500/month</div>
+                        <div class="property-title">Central Park Apartment</div>
+                        <div class="property-location">📍 Upper West Side, NYC</div>
+                        <div class="property-features">
+                            <span>🛏️ 2 Beds</span>
+                            <span>🛁 2 Baths</span>
+                            <span>📐 1,800 sq ft</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card" onclick="viewProperty(3)">
+                    <div class="property-image">🏠</div>
+                    <div class="property-tag">sale</div>
+                    <div class="property-info">
+                        <div class="property-price">$875,000</div>
+                        <div class="property-title">Brooklyn Loft</div>
+                        <div class="property-location">📍 DUMBO, Brooklyn</div>
+                        <div class="property-features">
+                            <span>🛏️ 2 Beds</span>
+                            <span>🛁 1 Bath</span>
+                            <span>📐 1,400 sq ft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Properties Page -->
+        <section id="properties" class="page-section">
+            <h2>All Properties</h2>
+            <div class="properties-grid">
+                <div class="property-card" onclick="viewProperty(1)">
+                    <div class="property-image">🏙️</div>
+                    <div class="property-tag">sale</div>
+                    <div class="property-info">
+                        <div class="property-price">$1,250,000</div>
+                        <div class="property-title">Modern Penthouse</div>
+                        <div class="property-location">📍 Manhattan, NYC</div>
+                        <div class="property-features">
+                            <span>🛏️ 3 Beds</span>
+                            <span>🛁 2 Baths</span>
+                            <span>📐 2,500 sq ft</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card" onclick="viewProperty(2)">
+                    <div class="property-image">🏢</div>
+                    <div class="property-tag rent">rent</div>
+                    <div class="property-info">
+                        <div class="property-price">$4,500/month</div>
+                        <div class="property-title">Central Park Apartment</div>
+                        <div class="property-location">📍 Upper West Side, NYC</div>
+                        <div class="property-features">
+                            <span>🛏️ 2 Beds</span>
+                            <span>🛁 2 Baths</span>
+                            <span>📐 1,800 sq ft</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card" onclick="viewProperty(3)">
+                    <div class="property-image">🏠</div>
+                    <div class="property-tag">sale</div>
+                    <div class="property-info">
+                        <div class="property-price">$875,000</div>
+                        <div class="property-title">Brooklyn Loft</div>
+                        <div class="property-location">📍 DUMBO, Brooklyn</div>
+                        <div class="property-features">
+                            <span>🛏️ 2 Beds</span>
+                            <span>🛁 1 Bath</span>
+                            <span>📐 1,400 sq ft</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card" onclick="viewProperty(4)">
+                    <div class="property-image">🏡</div>
+                    <div class="property-tag">sale</div>
+                    <div class="property-info">
+                        <div class="property-price">$450,000</div>
+                        <div class="property-title">Modern Family Home</div>
+                        <div class="property-location">📍 Downtown District</div>
+                        <div class="property-features">
+                            <span>🛏️ 3 Beds</span>
+                            <span>🛁 2 Baths</span>
+                            <span>📐 2,100 sq ft</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card" onclick="viewProperty(5)">
+                    <div class="property-image">🏢</div>
+                    <div class="property-tag rent">rent</div>
+                    <div class="property-info">
+                        <div class="property-price">$1,800/month</div>
+                        <div class="property-title">Modern Studio</div>
+                        <div class="property-location">📍 Downtown</div>
+                        <div class="property-features">
+                            <span>🛏️ 1 Bed</span>
+                            <span>🛁 1 Bath</span>
+                            <span>📐 600 sq ft</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="property-card" onclick="viewProperty(6)">
+                    <div class="property-image">🏘️</div>
+                    <div class="property-tag rent">rent</div>
+                    <div class="property-info">
+                        <div class="property-price">$3,200/month</div>
+                        <div class="property-title">Spacious Townhouse</div>
+                        <div class="property-location">📍 Quiet Neighborhood</div>
+                        <div class="property-features">
+                            <span>🛏️ 4 Beds</span>
+                            <span>🛁 3 Baths</span>
+                            <span>📐 2,400 sq ft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Property Detail Page -->
+        <section id="property-detail" class="page-section">
+            <div class="property-detail">
+                <button class="auth-btn login-btn" onclick="showPage('properties')" style="margin-bottom: 2rem;">← Back to Properties</button>
+                
+                <div class="property-gallery">
+                    <div class="main-image">🏙️</div>
+                    <div class="thumbnails">
+                        <div class="thumbnail">🛋️</div>
+                        <div class="thumbnail">🍳</div>
+                        <div class="thumbnail">🛁</div>
+                    </div>
+                </div>
+                
+                <div class="property-detail-content">
+                    <div class="property-info-detail">
+                        <div class="property-tag">sale</div>
+                        <h2>Modern Penthouse</h2>
+                        <div class="property-price">$1,250,000</div>
+                        <div class="property-location">📍 Manhattan, NYC</div>
+                        
+                        <div class="property-features" style="margin: 1.5rem 0;">
+                            <span>🛏️ 3 Beds</span>
+                            <span>🛁 2 Baths</span>
+                            <span>📐 2,500 sq ft</span>
+                            <span>🏢 12th Floor</span>
+                        </div>
+                        
+                        <h3>Description</h3>
+                        <p style="margin: 1rem 0; line-height: 1.6; color: var(--text-secondary);">
+                            This stunning modern penthouse offers breathtaking views of the city skyline. 
+                            Features include floor-to-ceiling windows, a gourmet kitchen with premium appliances, 
+                            a spacious living area, and a private terrace. The master suite includes a walk-in closet 
+                            and a luxurious bathroom with a soaking tub. Located in the heart of Manhattan, 
+                            this property is just steps away from fine dining, shopping, and entertainment.
+                        </p>
+                        
+                        <h3>3D Virtual Tour</h3>
+                        <div class="render-container">
+                            <div class="render-placeholder">
+                                <div>🏠</div>
+                                <p>3D Virtual Tour</p>
+                            </div>
+                            <div class="render-controls">
+                                <button class="render-btn">🔄 Rotate</button>
+                                <button class="render-btn">👆 Interact</button>
+                                <button class="render-btn">👓 VR View</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="property-sidebar">
+                        <h3>Contact Agent</h3>
+                        <div class="agent-info">
+                            <div class="agent-avatar">J</div>
+                            <div>
+                                <div style="font-weight: bold;">John Smith</div>
+                                <div style="color: var(--text-secondary);">Urban Real Estate</div>
+                            </div>
+                        </div>
+                        
+                        <form>
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" placeholder="Your Phone">
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agent Dashboard Page -->
+        <section id="agent-dashboard" class="page-section">
+            <h2>Agent Dashboard</h2>
             
-            <div class="ai-search">
-                <div class="search-row">
-                    <input type="text" class="search-input" id="aiLocation" placeholder="🌍 Enter location or landmark...">
-                    <select class="search-input" id="aiPropertyType">
-                        <option value="">🏠 All Property Types</option>
-                        <option value="house">🏡 Houses</option>
-                        <option value="apartment">🏢 Apartments</option>
-                        <option value="condo">🏬 Condos</option>
-                        <option value="commercial">🏪 Commercial</option>
-                        <option value="luxury">💎 Luxury</option>
-                    </select>
-                </div>
-                <div class="search-row">
-                    <select class="search-input" id="aiPriceRange">
-                        <option value="">💰 Any Price</option>
-                        <option value="0-200000">$0 - $200k</option>
-                        <option value="200000-500000">$200k - $500k</option>
-                        <option value="500000-1000000">$500k - $1M</option>
-                        <option value="1000000+">$1M+</option>
-                    </select>
-                    <select class="search-input" id="aiListingType">
-                        <option value="">📋 Buy or Rent</option>
-                        <option value="sale">🏠 For Sale</option>
-                        <option value="rent">🏢 For Rent</option>
-                    </select>
-                    <button class="ai-search-btn" onclick="aiSearch()">
-                        <span>🤖 AI Search</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="container">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">2.5K+</div>
-                <div class="stat-label">Properties Listed</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">1.8K+</div>
-                <div class="stat-label">Happy Clients</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">Cities Covered</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">95%</div>
-                <div class="stat-label">Satisfaction Rate</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Map Section -->
-    <section class="container">
-        <div class="map-section">
-            <div class="map-header">
-                <h2>🗺️ Interactive Property Map</h2>
-                <p>Explore properties in real-time with our AI-powered mapping system</p>
-                
-                <div class="map-controls">
-                    <button class="map-filter active" onclick="filterMap('all')" data-filter="all">
-                        🌐 All Properties
-                    </button>
-                    <button class="map-filter" onclick="filterMap('sale')" data-filter="sale">
-                        🏠 For Sale
-                    </button>
-                    <button class="map-filter" onclick="filterMap('rent')" data-filter="rent">
-                        🏢 For Rent
-                    </button>
-                    <button class="map-filter" onclick="filterMap('luxury')" data-filter="luxury">
-                        💎 Luxury
-                    </button>
-                </div>
-            </div>
-            
-            <div id="map"></div>
-        </div>
-    </section>
-
-    <main class="container">
-        <div class="tabs-container">
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('explore')">🔍 Explore</button>
-                <button class="tab" onclick="showTab('buy')">🏠 Buy Properties</button>
-                <button class="tab" onclick="showTab('rent')">🏢 Rent Properties</button>
-                <button class="tab" onclick="showTab('sell')">📝 List Property</button>
-                <button class="tab" onclick="showTab('contact')">💬 Contact</button>
-            </div>
-
-            <!-- Explore Tab -->
-            <div id="explore" class="tab-content active">
-                <h2>🚀 Smart Property Discovery</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Use our interactive map above to explore properties or browse featured listings below.</p>
-                
-                <div class="properties-grid" id="exploreProperties">
-                    <!-- Properties will be loaded dynamically -->
-                </div>
-            </div>
-
-            <!-- Buy Properties Tab -->
-            <div id="buy" class="tab-content">
-                <h2>🏠 Properties for Sale</h2>
-                <div class="properties-grid" id="buyProperties">
-                    <!-- Properties will be loaded dynamically -->
-                </div>
-            </div>
-
-            <!-- Rent Properties Tab -->
-            <div id="rent" class="tab-content">
-                <h2>🏢 Properties for Rent</h2>
-                <div class="properties-grid" id="rentProperties">
-                    <!-- Properties will be loaded dynamically -->
-                </div>
-            </div>
-
-            <!-- List Property Tab -->
-            <div id="sell" class="tab-content">
-                <h2>📝 List Your Property</h2>
-                
-                <div class="form-section">
-                    <h3>Property Details</h3>
+            <div class="form-section">
+                <h3>Create New Property Listing</h3>
+                <form id="propertyForm" onsubmit="submitProperty(event)">
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="listingTitle">Property Title</label>
-                            <input type="text" id="listingTitle" placeholder="e.g., Beautiful Family Home">
+                            <label for="propertyTitle">Property Title</label>
+                            <input type="text" id="propertyTitle" required>
                         </div>
                         <div class="form-group">
-                            <label for="listingType">Listing Type</label>
-                            <select id="listingType">
+                            <label for="propertyType">Listing Type</label>
+                            <select id="propertyType" required>
                                 <option value="sale">For Sale</option>
                                 <option value="rent">For Rent</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="propertyCategory">Property Type</label>
-                            <select id="propertyCategory">
+                            <select id="propertyCategory" required>
                                 <option value="house">House</option>
                                 <option value="apartment">Apartment</option>
                                 <option value="condo">Condo</option>
@@ -1095,85 +981,94 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="listingPrice">Price</label>
-                            <input type="number" id="listingPrice" placeholder="Enter price">
+                            <label for="propertyPrice">Price</label>
+                            <input type="number" id="propertyPrice" required>
                         </div>
                         <div class="form-group">
-                            <label for="bedrooms">Bedrooms</label>
-                            <input type="number" id="bedrooms" placeholder="Number of bedrooms">
+                            <label for="propertyBedrooms">Bedrooms</label>
+                            <input type="number" id="propertyBedrooms" required>
                         </div>
                         <div class="form-group">
-                            <label for="bathrooms">Bathrooms</label>
-                            <input type="number" id="bathrooms" placeholder="Number of bathrooms">
+                            <label for="propertyBathrooms">Bathrooms</label>
+                            <input type="number" id="propertyBathrooms" required>
                         </div>
                         <div class="form-group">
-                            <label for="sqft">Square Feet</label>
-                            <input type="number" id="sqft" placeholder="Property size">
+                            <label for="propertySqft">Square Feet</label>
+                            <input type="number" id="propertySqft" required>
                         </div>
                         <div class="form-group">
-                            <label for="location">Location</label>
-                            <input type="text" id="location" placeholder="Full address">
+                            <label for="propertyLocation">Location</label>
+                            <input type="text" id="propertyLocation" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" rows="4" placeholder="Describe your property..."></textarea>
+                        <label for="propertyDescription">Description</label>
+                        <textarea id="propertyDescription" rows="4" required></textarea>
                     </div>
                     
-                    <button class="submit-btn" onclick="submitListing()">🚀 List Property</button>
-                </div>
+                    <div class="form-group">
+                        <label for="propertyImages">Upload Images</label>
+                        <input type="file" id="propertyImages" multiple accept="image/*">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="property3D">Upload 3D Model (optional)</label>
+                        <input type="file" id="property3D" accept=".glb,.gltf">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Create Listing</button>
+                </form>
             </div>
-
-            <!-- Contact Tab -->
-            <div id="contact" class="tab-content">
-                <h2>💬 Contact Us</h2>
+            
+            <h3 style="margin-top: 3rem;">My Listings</h3>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <div class="property-image">🏙️</div>
+                    <div class="property-tag">sale</div>
+                    <div class="property-info">
+                        <div class="property-price">$1,250,000</div>
+                        <div class="property-title">Modern Penthouse</div>
+                        <div class="property-location">📍 Manhattan, NYC</div>
+                        <div class="property-features">
+                            <span>🛏️ 3 Beds</span>
+                            <span>🛁 2 Baths</span>
+                            <span>📐 2,500 sq ft</span>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="form-section">
-                    <h3>Get in Touch</h3>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="contactName">Your Name</label>
-                            <input type="text" id="contactName" placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
-                            <label for="contactEmail">Email</label>
-                            <input type="email" id="contactEmail" placeholder="Enter your email">
-                        </div>
-                        <div class="form-group">
-                            <label for="contactPhone">Phone</label>
-                            <input type="tel" id="contactPhone" placeholder="Enter your phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="contactSubject">Subject</label>
-                            <select id="contactSubject">
-                                <option value="general">General Inquiry</option>
-                                <option value="buying">Buying Property</option>
-                                <option value="selling">Selling Property</option>
-                                <option value="renting">Renting Property</option>
-                            </select>
+                <div class="property-card">
+                    <div class="property-image">🏠</div>
+                    <div class="property-tag">sale</div>
+                    <div class="property-info">
+                        <div class="property-price">$875,000</div>
+                        <div class="property-title">Brooklyn Loft</div>
+                        <div class="property-location">📍 DUMBO, Brooklyn</div>
+                        <div class="property-features">
+                            <span>🛏️ 2 Beds</span>
+                            <span>🛁 1 Bath</span>
+                            <span>📐 1,400 sq ft</span>
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="contactMessage">Message</label>
-                        <textarea id="contactMessage" rows="4" placeholder="Tell us how we can help..."></textarea>
-                    </div>
-                    
-                    <button class="submit-btn" onclick="submitContact()">💬 Send Message</button>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Other pages would go here -->
+        <section id="agents" class="page-section">
+            <h2>Our Agents</h2>
+            <p>Meet our professional real estate agents.</p>
+        </section>
+        
+        <section id="about" class="page-section">
+            <h2>About Urban</h2>
+            <p>Learn about our mission and vision.</p>
+        </section>
     </main>
 
-    <!-- Leaflet JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
-    
     <script>
         // Global variables
-        let map;
-        let propertyMarkers = [];
-        let currentFilter = 'all';
         let authToken = localStorage.getItem('urban_auth_token');
         let currentUser = JSON.parse(localStorage.getItem('urban_user') || 'null');
         
@@ -1182,34 +1077,58 @@
         
         // Initialize app
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize the map
-            setTimeout(initMap, 100);
-            
             // Check authentication status
             checkAuthStatus();
             
-            // Load properties from backend
-            loadProperties();
-            
-            // Show install banner after 3 seconds if not already shown
-            setTimeout(() => {
-                if (!installBannerShown && !window.matchMedia('(display-mode: standalone)').matches) {
-                    showInstallBanner();
-                }
-            }, 3000);
+            // Check if we're viewing a specific property from URL
+            checkUrlParams();
         });
+
+        // Check URL parameters for property viewing
+        function checkUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = urlParams.get('property');
+            const agentId = urlParams.get('agent');
+            
+            if (propertyId) {
+                viewProperty(propertyId, agentId);
+            }
+        }
 
         // Check authentication status and update UI
         function checkAuthStatus() {
             const authButtons = document.getElementById('authButtons');
             const userMenu = document.getElementById('userMenu');
+            const userAvatar = document.getElementById('userAvatar');
             
             if (authToken && currentUser) {
                 authButtons.style.display = 'none';
                 userMenu.style.display = 'flex';
+                
+                // Set user avatar initial
+                if (currentUser.full_name) {
+                    userAvatar.textContent = currentUser.full_name.charAt(0).toUpperCase();
+                }
+                
+                // Show agent dashboard link if user is an agent
+                updateNavForAgent();
             } else {
                 authButtons.style.display = 'flex';
                 userMenu.style.display = 'none';
+            }
+        }
+
+        // Update navigation for agent users
+        function updateNavForAgent() {
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (currentUser && currentUser.is_agent) {
+                // Check if agent dashboard link already exists
+                if (!document.querySelector('.agent-dashboard-link')) {
+                    const agentLink = document.createElement('li');
+                    agentLink.innerHTML = '<a href="#" class="agent-dashboard-link" onclick="showPage(\'agent-dashboard\')">📊 Dashboard</a>';
+                    navLinks.appendChild(agentLink);
+                }
             }
         }
 
@@ -1258,7 +1177,10 @@
                 // In a real app, you'd fetch user details from the backend
                 currentUser = {
                     id: tokenPayload.id,
-                    username: tokenPayload.sub
+                    username: tokenPayload.sub,
+                    full_name: "John Smith", // This would come from the backend
+                    is_agent: true, // This would come from the backend
+                    has_active_subscription: true // This would come from the backend
                 };
                 
                 localStorage.setItem('urban_user', JSON.stringify(currentUser));
@@ -1310,446 +1232,67 @@
             localStorage.removeItem('urban_user');
             checkAuthStatus();
             alert('Logged out successfully');
+            showPage('home');
         }
 
-        // Load properties from backend
-        async function loadProperties() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/properties`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch properties');
-                }
-                
-                const properties = await response.json();
-                renderProperties(properties);
-                
-            } catch (error) {
-                console.error('Error loading properties:', error);
-                // Fallback to sample data if backend is unavailable
-                renderSampleProperties();
-            }
-        }
-
-        // Render properties in the UI
-        function renderProperties(properties) {
-            const exploreContainer = document.getElementById('exploreProperties');
-            const buyContainer = document.getElementById('buyProperties');
-            const rentContainer = document.getElementById('rentProperties');
-            
-            // Clear existing content
-            exploreContainer.innerHTML = '';
-            buyContainer.innerHTML = '';
-            rentContainer.innerHTML = '';
-            
-            // Add properties to appropriate sections
-            properties.forEach(property => {
-                const propertyCard = createPropertyCard(property);
-                
-                // Add to explore section
-                exploreContainer.appendChild(propertyCard.cloneNode(true));
-                
-                // Add to buy or rent section
-                if (property.listing_type === 'sale') {
-                    buyContainer.appendChild(propertyCard.cloneNode(true));
-                } else if (property.listing_type === 'rent') {
-                    rentContainer.appendChild(propertyCard.cloneNode(true));
-                }
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
             });
             
-            // Add animation delays to property cards
-            const cards = document.querySelectorAll('.property-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
-        }
-
-        // Create a property card element
-        function createPropertyCard(property) {
-            const card = document.createElement('div');
-            card.className = 'property-card animate-slide-up';
-            card.onclick = () => viewPropertyDetails(property.id);
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
             
-            // Determine property type for styling
-            const isRent = property.listing_type === 'rent';
-            const propertyType = property.property_type || 'house';
-            const propertyIcons = {
-                house: '🏠',
-                apartment: '🏢',
-                condo: '🏬',
-                commercial: '🏪',
-                luxury: '💎'
-            };
-            
-            card.innerHTML = `
-                <div class="property-image">${propertyIcons[propertyType] || '🏠'}</div>
-                <div class="property-tag ${isRent ? 'rent' : ''}">${isRent ? 'rent' : 'sale'}</div>
-                <div class="property-info">
-                    <div class="property-price">${formatPrice(property.price, isRent)}</div>
-                    <div class="property-title">${property.title || 'Untitled Property'}</div>
-                    <div class="property-location">📍 ${property.location || 'Location not specified'}</div>
-                    <div class="property-features">
-                        <span>🛏️ ${property.bedrooms || 0} Beds</span>
-                        <span>🛁 ${property.bathrooms || 0} Baths</span>
-                        <span>📐 ${property.sqft || 0} sq ft</span>
-                    </div>
-                </div>
-            `;
-            
-            return card;
-        }
-
-        // Format price based on listing type
-        function formatPrice(price, isRent) {
-            if (!price) return 'Price not available';
-            
-            if (isRent) {
-                return `$${price.toLocaleString()}/month`;
-            } else {
-                return `$${price.toLocaleString()}`;
-            }
-        }
-
-        // Fallback to sample properties if backend is unavailable
-        function renderSampleProperties() {
-            const sampleProperties = [
-                {
-                    id: 1,
-                    title: "Modern Penthouse",
-                    price: 1250000,
-                    listing_type: "sale",
-                    property_type: "luxury",
-                    bedrooms: 3,
-                    bathrooms: 2,
-                    sqft: 2500,
-                    location: "Manhattan, NYC"
-                },
-                {
-                    id: 2,
-                    title: "Central Park Apartment",
-                    price: 4500,
-                    listing_type: "rent",
-                    property_type: "apartment",
-                    bedrooms: 2,
-                    bathrooms: 2,
-                    sqft: 1800,
-                    location: "Upper West Side, NYC"
-                },
-                {
-                    id: 3,
-                    title: "Brooklyn Loft",
-                    price: 875000,
-                    listing_type: "sale",
-                    property_type: "house",
-                    bedrooms: 2,
-                    bathrooms: 1,
-                    sqft: 1400,
-                    location: "DUMBO, Brooklyn"
-                }
-            ];
-            
-            renderProperties(sampleProperties);
-        }
-
-        // Initialize map
-        function initMap() {
-            // Create map centered on NYC
-            map = L.map('map').setView([40.7128, -74.0060], 12);
-            
-            // Add dark theme tile layer
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                subdomains: 'abcd',
-                maxZoom: 19
-            }).addTo(map);
-            
-            // Load property markers
-            loadPropertyMarkers();
-        }
-
-        // Create custom icons for different property types
-        function createPropertyIcon(property) {
-            const isRent = property.listing_type === 'rent';
-            const isLuxury = property.property_type === 'luxury';
-            
-            let iconColor, iconSymbol;
-            
-            if (isLuxury) {
-                iconColor = isRent ? '#f59e0b' : '#8b5cf6'; // Gold for luxury rent, Purple for luxury sale
-                iconSymbol = '💎';
-            } else if (isRent) {
-                iconColor = '#10b981'; // Green for rent
-                iconSymbol = '🏢';
-            } else {
-                iconColor = '#3b82f6'; // Blue for sale
-                iconSymbol = '🏠';
-            }
-            
-            return L.divIcon({
-                html: `
-                    <div style="
-                        background: ${iconColor};
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        border: 3px solid white;
-                        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                        font-size: 18px;
-                        animation: pulse 2s infinite;
-                    ">${iconSymbol}</div>
-                `,
-                className: 'custom-property-icon',
-                iconSize: [40, 40],
-                iconAnchor: [20, 20],
-                popupAnchor: [0, -20]
-            });
-        }
-
-        // Load property markers on map
-        function loadPropertyMarkers() {
-            // Clear existing markers
-            propertyMarkers.forEach(marker => map.removeLayer(marker));
-            propertyMarkers = [];
-            
-            // In a real app, you would fetch properties from the backend
-            // For now, we'll use sample data
-            const sampleProperties = [
-                {
-                    id: 1,
-                    title: "Modern Penthouse",
-                    price: 1250000,
-                    listing_type: "sale",
-                    property_type: "luxury",
-                    lat: 40.7128,
-                    lng: -74.0060,
-                    bedrooms: 3,
-                    bathrooms: 2,
-                    sqft: 2500,
-                    location: "Manhattan, NYC"
-                },
-                {
-                    id: 2,
-                    title: "Central Park Apartment",
-                    price: 4500,
-                    listing_type: "rent",
-                    property_type: "apartment",
-                    lat: 40.7580,
-                    lng: -73.9855,
-                    bedrooms: 2,
-                    bathrooms: 2,
-                    sqft: 1800,
-                    location: "Upper West Side, NYC"
-                },
-                {
-                    id: 3,
-                    title: "Brooklyn Loft",
-                    price: 875000,
-                    listing_type: "sale",
-                    property_type: "house",
-                    lat: 40.6892,
-                    lng: -74.0445,
-                    bedrooms: 2,
-                    bathrooms: 1,
-                    sqft: 1400,
-                    location: "DUMBO, Brooklyn"
-                }
-            ];
-            
-            // Add markers for each property
-            sampleProperties.forEach(property => {
-                // Check if property matches current filter
-                if (currentFilter !== 'all' && 
-                    property.listing_type !== currentFilter && 
-                    property.property_type !== currentFilter) {
-                    return;
-                }
-                
-                const marker = L.marker([property.lat, property.lng], {
-                    icon: createPropertyIcon(property)
-                });
-                
-                // Create popup content
-                const popupContent = `
-                    <div class="property-popup">
-                        <h4>${property.title}</h4>
-                        <div class="price" style="color: ${property.listing_type === 'rent' ? '#10b981' : '#3b82f6'};">
-                            ${formatPrice(property.price, property.listing_type === 'rent')}
-                        </div>
-                        <div style="margin: 8px 0; color: #cbd5e1;">
-                            📍 ${property.location}
-                        </div>
-                        <div style="display: flex; gap: 12px; font-size: 0.9em; color: #94a3b8;">
-                            <span>🛏️ ${property.bedrooms} Beds</span>
-                            <span>🛁 ${property.bathrooms} Baths</span>
-                            <span>📐 ${property.sqft} sq ft</span>
-                        </div>
-                        <button onclick="viewPropertyDetails(${property.id})" style="
-                            margin-top: 10px;
-                            background: linear-gradient(135deg, #00d4ff, #06b6d4);
-                            color: #0f172a;
-                            border: none;
-                            padding: 8px 16px;
-                            border-radius: 6px;
-                            cursor: pointer;
-                            font-weight: bold;
-                            width: 100%;
-                        ">
-                            View Details
-                        </button>
-                    </div>
-                `;
-                
-                marker.bindPopup(popupContent);
-                marker.addTo(map);
-                propertyMarkers.push(marker);
-                
-                // Add hover effects
-                marker.on('mouseover', function() {
-                    this.openPopup();
-                });
-            });
-        }
-
-        // Filter map properties
-        function filterMap(filterType) {
-            currentFilter = filterType;
-            
-            // Update active filter button
-            document.querySelectorAll('.map-filter').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Reload markers with filter
-            loadPropertyMarkers();
-        }
-
-        // Focus map on specific property
-        function focusMapProperty(lat, lng, title) {
-            map.setView([lat, lng], 16);
-            
-            // Find and open popup for this property
-            propertyMarkers.forEach(marker => {
-                const markerLat = marker.getLatLng().lat;
-                const markerLng = marker.getLatLng().lng;
-                if (Math.abs(markerLat - lat) < 0.001 && Math.abs(markerLng - lng) < 0.001) {
-                    marker.openPopup();
-                }
-            });
-        }
-
-        // View property details
-        function viewPropertyDetails(propertyId) {
-            // In a real app, this would fetch property details from the backend
-            alert(`Property details for ID: ${propertyId}\n\nIn a real app, this would open a detailed property page with photos, virtual tour, and contact information.`);
-        }
-
-        // PWA Installation
-        let deferredPrompt;
-        let installBannerShown = false;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            if (!installBannerShown) {
-                showInstallBanner();
-            }
-        });
-
-        function showInstallBanner() {
-            const banner = document.getElementById('installBanner');
-            banner.classList.add('show');
-            installBannerShown = true;
-        }
-
-        function hideInstallBanner() {
-            const banner = document.getElementById('installBanner');
-            banner.classList.remove('show');
-        }
-
-        function installPWA() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((result) => {
-                    deferredPrompt = null;
-                    hideInstallBanner();
-                });
-            }
-        }
-
-        // Tab functionality
-        function showTab(tabName) {
-            // Hide all tab contents
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => content.classList.remove('active'));
-            
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            
-            // Show selected tab content
-            document.getElementById(tabName).classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-        }
-
-        // AI Search functionality
-        function aiSearch() {
-            const location = document.getElementById('aiLocation').value;
-            const type = document.getElementById('aiPropertyType').value;
-            const price = document.getElementById('aiPriceRange').value;
-            const listingType = document.getElementById('aiListingType').value;
-            
-            // Simulate AI search loading
-            const searchBtn = document.querySelector('.ai-search-btn');
-            const originalContent = searchBtn.innerHTML;
-            searchBtn.innerHTML = '<div class="loading"></div><span>AI Processing...</span>';
-            
-            setTimeout(() => {
-                searchBtn.innerHTML = originalContent;
-                
-                // Filter map based on search
-                if (listingType) {
-                    filterMap(listingType);
-                }
-                
-                // Show results notification
-                const resultCount = Math.floor(Math.random() * 15) + 5;
-                alert(`🤖 AI Search Complete!\n\nFound ${resultCount} properties matching your criteria:\n\n📍 Location: ${location || 'All areas'}\n🏠 Type: ${type || 'All types'}\n💰 Price: ${price || 'Any price'}\n📋 Listing: ${listingType || 'Buy or Rent'}\n\nCheck the map above to explore results!`);
-            }, 2000);
+            // Update URL without reloading page
+            window.history.pushState({}, '', `?page=${pageId}`);
         }
 
         // Property viewing
-        function viewProperty(id) {
-            alert(`Opening property details for Property #${id}. In a real app, this would show detailed information, photos, virtual tours, and contact options with AR/VR integration.`);
+        function viewProperty(propertyId, agentId = null) {
+            // If we have an agent ID, construct a shareable URL
+            if (agentId) {
+                window.history.pushState({}, '', `?property=${propertyId}&agent=${agentId}`);
+            } else {
+                window.history.pushState({}, '', `?property=${propertyId}`);
+            }
+            
+            showPage('property-detail');
         }
 
-        // Form submissions
-        async function submitListing() {
-            // Check if user is authenticated
-            if (!authToken) {
+        // Property submission
+        async function submitProperty(event) {
+            event.preventDefault();
+            
+            // Check if user is authenticated and is an agent
+            if (!authToken || !currentUser) {
                 alert('Please login to list a property');
                 openAuthModal();
                 return;
             }
             
-            const title = document.getElementById('listingTitle').value;
-            const listingType = document.getElementById('listingType').value;
-            const propertyType = document.getElementById('propertyCategory').value;
-            const price = document.getElementById('listingPrice').value;
-            const bedrooms = document.getElementById('bedrooms').value;
-            const bathrooms = document.getElementById('bathrooms').value;
-            const sqft = document.getElementById('sqft').value;
-            const location = document.getElementById('location').value;
-            const description = document.getElementById('description').value;
-            
-            if (!title || !price || !location) {
-                alert('Please fill in all required fields.');
+            if (!currentUser.is_agent) {
+                alert('You need to be a registered agent to list properties');
                 return;
             }
+            
+            // Check if agent has active subscription
+            if (!currentUser.has_active_subscription) {
+                alert('You need an active subscription to list properties. Please contact support.');
+                return;
+            }
+            
+            // Get form data
+            const title = document.getElementById('propertyTitle').value;
+            const listing_type = document.getElementById('propertyType').value;
+            const property_type = document.getElementById('propertyCategory').value;
+            const price = document.getElementById('propertyPrice').value;
+            const bedrooms = document.getElementById('propertyBedrooms').value;
+            const bathrooms = document.getElementById('propertyBathrooms').value;
+            const sqft = document.getElementById('propertySqft').value;
+            const location = document.getElementById('propertyLocation').value;
+            const description = document.getElementById('propertyDescription').value;
             
             try {
                 const response = await fetch(`${API_BASE_URL}/properties`, {
@@ -1760,8 +1303,8 @@
                     },
                     body: JSON.stringify({
                         title,
-                        listing_type: listingType,
-                        property_type: propertyType,
+                        listing_type,
+                        property_type,
                         price: parseFloat(price),
                         bedrooms: parseInt(bedrooms),
                         bathrooms: parseInt(bathrooms),
@@ -1779,83 +1322,17 @@
                 alert('🚀 Property listed successfully!');
                 
                 // Reset form
-                document.querySelectorAll('#sell input, #sell select, #sell textarea').forEach(field => field.value = '');
-                
-                // Reload properties
-                loadProperties();
+                document.getElementById('propertyForm').reset();
                 
             } catch (error) {
                 alert('Failed to list property: ' + error.message);
             }
         }
 
-        async function submitContact() {
-            const name = document.getElementById('contactName').value;
-            const email = document.getElementById('contactEmail').value;
-            const phone = document.getElementById('contactPhone').value;
-            const subject = document.getElementById('contactSubject').value;
-            const message = document.getElementById('contactMessage').value;
-            
-            if (!name || !email || !message) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            try {
-                const response = await fetch(`${API_BASE_URL}/inquiries`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name,
-                        email,
-                        phone,
-                        subject,
-                        message
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Failed to send message');
-                }
-                
-                alert('💬 Message sent successfully! Our team will get back to you soon.');
-                
-                // Reset form
-                document.querySelectorAll('#contact input, #contact select, #contact textarea').forEach(field => field.value = '');
-                
-            } catch (error) {
-                alert('Failed to send message: ' + error.message);
-            }
+        // Generate shareable link for agent's property
+        function generateShareableLink(propertyId) {
+            return `${window.location.origin}${window.location.pathname}?property=${propertyId}&agent=${currentUser.id}`;
         }
-
-        // Service Worker Registration (simulated)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                console.log('Urban PWA: Service Worker would be registered here');
-            });
-        }
-
-        // Add CSS animation for marker pulse effect
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-                50% {
-                    transform: scale(1.1);
-                    opacity: 0.8;
-                }
-                100% {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
