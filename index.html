@@ -1307,47 +1307,49 @@
             document.getElementById(`${tabName}Form`).classList.add('active');
         }
 
-        async function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            try {
-                const response = await fetch(`${API_BASE_URL}/auth/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username, password })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Login failed');
-                }
-                
-                const data = await response.json();
-                authToken = data.access_token;
-                localStorage.setItem('urban_auth_token', authToken);
-                
-                // Get user info from token
-                const tokenPayload = JSON.parse(atob(authToken.split('.')[1]));
-                
-                // In a real app, you'd fetch user details from the backend
-                currentUser = {
-                    id: tokenPayload.id,
-                    username: tokenPayload.sub
-                };
-                
-                localStorage.setItem('urban_user', JSON.stringify(currentUser));
-                
-                closeAuthModal();
-                checkAuthStatus();
-                alert('Login successful!');
-                
-            } catch (error) {
-                alert('Login failed: ' + error.message);
-            }
+       async function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Login failed');
         }
+        
+        const data = await response.json();
+        authToken = data.access_token;
+        localStorage.setItem('urban_auth_token', authToken);
+        
+        // Decode JWT payload
+        const tokenPayload = JSON.parse(atob(authToken.split('.')[1]));
+        
+        // Store user info
+        currentUser = {
+            id: tokenPayload.id,
+            username: tokenPayload.sub
+        };
+        localStorage.setItem('urban_user', JSON.stringify(currentUser));
+        
+        closeAuthModal();
+        checkAuthStatus();
+        alert('Login successful!');
+        
+        // ✅ Redirect to profile.html
+        window.location.href = "profile.html";
+
+    } catch (error) {
+        alert('Login failed: ' + error.message);
+    }
+}
 
         async function handleRegister(event) {
             event.preventDefault();
